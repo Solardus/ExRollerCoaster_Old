@@ -32,8 +32,8 @@ import erc.message.ERC_PacketHandler;
 import erc.proxy.IProxy;
 import erc.tileEntity.*;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
