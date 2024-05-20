@@ -5,8 +5,8 @@ import erc.message.ERC_PacketHandler;
 import erc.tileEntity.TileEntityRailBranch2;
 import erc.tileEntity.Wrap_TileEntityRail;
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -24,7 +24,7 @@ public class blockRailBranch extends blockRailBase{
 		return true;
 	}
 
-	// ÔÎ“ü—Í§Œä
+	// èµ¤çŸ³å…¥åŠ›åˆ¶å¾¡
     public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
     {
         if (!world.isRemote)
@@ -41,7 +41,7 @@ public class blockRailBranch extends blockRailBase{
                 	rail.changeRail();
                 	rail.changeToggleFlag();
                 	ERC_PacketHandler.INSTANCE.sendToAll(new ERC_MessageRailMiscStC(rail));
-                	world.playAuxSFXAtEntity((EntityPlayer)null, 1003, x, y, z, 0); //Œø‰Ê‰¹H
+                	world.playAuxSFXAtEntity((PlayerEntity)null, 1003, x, y, z, 0); //åŠ¹æœéŸ³ï¼Ÿ
                 }
                 else if(!flag && tgle)
                 {
@@ -51,10 +51,10 @@ public class blockRailBranch extends blockRailBase{
         }
     }
   
-    // TileEntity‰Šú‰»@Branch—p“Áêˆ—@ƒŒ[ƒ‹‚Q‚Â‚Æ‚à‰Šú‰»
-    protected void onTileEntityInitFirst(World world, EntityLivingBase player, Wrap_TileEntityRail rail, int x, int y, int z)
+    // TileEntityåˆæœŸåŒ–ã€€Branchç”¨ç‰¹æ®Šå‡¦ç†ã€€ãƒ¬ãƒ¼ãƒ«ï¼’ã¤ã¨ã‚‚åˆæœŸåŒ–
+    protected void onTileEntityInitFirst(World world, LivingEntity player, Wrap_TileEntityRail rail, int x, int y, int z)
 	{
-		// ƒuƒƒbƒNİ’u‚ÌƒvƒŒƒCƒ„[‚ÌŒü‚«
+		// ãƒ–ãƒ­ãƒƒã‚¯è¨­ç½®æ™‚ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‘ã
     	TileEntityRailBranch2 railb = (TileEntityRailBranch2) rail;
     	Vec3 metadir = ConvertVec3FromMeta(world.getBlockMetadata(x, y, z));
     	Vec3 BaseDir = Vec3.createVectorHelper(
@@ -77,7 +77,7 @@ public class blockRailBranch extends blockRailBase{
 					Math.sin(pit) * (metadir.yCoord!=0?0:1), 
 					Math.cos(yaw) * (metadir.zCoord!=0?0:1) );
 						
-			// V‹Kİ’u‚ÌƒŒ[ƒ‹‚É‘Î‚µ‚ÄÀ•Wİ’èB@Œü‚«‚ÍƒvƒŒƒCƒ„[‚ÌŒü‚¢‚Ä‚¢‚é•ûŒü‚Ö			
+			// æ–°è¦è¨­ç½®ã®ãƒ¬ãƒ¼ãƒ«ã«å¯¾ã—ã¦åº§æ¨™è¨­å®šã€‚ã€€å‘ãã¯ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‘ã„ã¦ã„ã‚‹æ–¹å‘ã¸			
 //			railb.SetNextRailPosition(x+(int)(vecDir.xCoord*10), y+(int)(vecDir.yCoord*10), z+(int)(vecDir.zCoord*10));
 			railb.SetNextRailVectors(
 					Vec3.createVectorHelper(x+(int)(vecDir.xCoord*10)+0.5, y+(int)(vecDir.yCoord*10)+0.5, z+(int)(vecDir.zCoord*10)+0.5), 
