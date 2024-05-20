@@ -5,7 +5,7 @@ import erc.message.ERC_PacketHandler;
 import erc.tileEntity.TileEntityRailBase;
 import erc.tileEntity.TileEntityRailConstVelosity;
 import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
 public class blockRailConstVelocity extends blockRailBase{
@@ -33,7 +33,7 @@ public class blockRailConstVelocity extends blockRailBase{
             		rail.changeToggleFlag();
             		rail.turnOnFlag();
                 	ERC_PacketHandler.INSTANCE.sendToAll(new ERC_MessageRailMiscStC(rail));
-                	world.playAuxSFXAtEntity((EntityPlayer)null, 1003, x, y, z, 0); //���ʉ��H
+                	world.playAuxSFXAtEntity((PlayerEntity)null, 1003, x, y, z, 0); //���ʉ��H
                 }
             	else if(!flag && tgle)
                 {
