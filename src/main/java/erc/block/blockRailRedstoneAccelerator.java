@@ -5,8 +5,8 @@ import erc.message.ERC_PacketHandler;
 import erc.tileEntity.TileEntityRailBase;
 import erc.tileEntity.TileEntityRailRedstoneAccelerator;
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -44,20 +44,20 @@ public class blockRailRedstoneAccelerator extends blockRailBase{
 //                 	rail.changeToggleFlag();
                  	world.setBlockMetadataWithNotify(x, y, z, 8^world.getBlockMetadata(x, y, z), 2);
 //                 	ERC_PacketHandler.INSTANCE.sendToAll(new ERC_MessageRailMiscStC(rail));
-                 	world.playAuxSFXAtEntity((EntityPlayer)null, 1003, x, y, z, 0); //効果音？
+                 	world.playAuxSFXAtEntity((PlayerEntity)null, 1003, x, y, z, 0); //ﾅ津ｸ窶ｰﾃ岩ｰﾂｹﾂ？
                  }
             } 
         }
     }
     @Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack p_149689_6_) 
+	public void onBlockPlacedBy(World world, int x, int y, int z, LivingEntity player, ItemStack p_149689_6_) 
     {
 		super.onBlockPlacedBy(world, x, y, z, player, p_149689_6_);
 		TileEntityRailRedstoneAccelerator rail = (TileEntityRailRedstoneAccelerator) world.getTileEntity(x, y, z);
 		rail.setToggleFlag(0 != (8 & world.getBlockMetadata(x, y, z)));
     }
 
-	// 赤石入力用
+	// ﾂ静板静寂愿ｼ窶氾坂廃
     public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
     {
         if (!world.isRemote)
@@ -73,7 +73,7 @@ public class blockRailRedstoneAccelerator extends blockRailBase{
                 {
                 	rail.changeToggleFlag();
                 	ERC_PacketHandler.INSTANCE.sendToAll(new ERC_MessageRailMiscStC(rail));
-                	world.playAuxSFXAtEntity((EntityPlayer)null, 1003, x, y, z, 0); //効果音？
+                	world.playAuxSFXAtEntity((PlayerEntity)null, 1003, x, y, z, 0); //ﾅ津ｸ窶ｰﾃ岩ｰﾂｹﾂ？
                 }
             }
         }
